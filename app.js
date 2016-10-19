@@ -25,5 +25,26 @@ app.controller("cameraController", ($scope) => {
       onSale: true
     }
   ]
+  $scope.currentItems = [];
+  $scope.totalCost = 0
+  var taxRate = .18;
+
   $scope.sort = 'price'
+  $scope.addtoCart = function(camera) {
+    console.log('I was clicked!');
+    console.log('item:', camera);
+
+    $scope.currentItems.push(camera);
+    updateCart()
+  }
+
+  function updateCart() {
+    var sum = 0;
+    for(var i = 0; i < $scope.currentItems.length; i++) {
+    sum += $scope.currentItems[i].price;
+  }
+  $scope.tax = (sum * taxRate)
+  $scope.totalCost = sum + (sum * taxRate);
+  console.log('$scope.totalCost:', $scope.totalCost);
+  }
 })

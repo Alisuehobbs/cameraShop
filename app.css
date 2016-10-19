@@ -1,0 +1,14 @@
+.cameraImage {
+  height: 250px;
+  width: auto;
+}
+
+.shop {
+  width: 50%;
+  display: inline-block;
+}
+
+.shoppingCart {
+  width: 50%;
+  display: inline-block;
+}

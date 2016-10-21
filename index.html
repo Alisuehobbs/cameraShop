@@ -5,6 +5,9 @@
   <meta charset="utf-8">
   <title>Camera Shop</title>
 
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
   <link rel="stylesheet" href="app.css">
 </head>
 
@@ -45,10 +48,51 @@
       <h3>Total Cost:</h3>
       <span>{{totalCost | currency}}</span>
     </div>
+
+    <div class="container">
+      <h1>Users:</h1>
+      <li ng-repeat="user in users">
+        {{user}}
+      </li>
+
+    <h1>Sign Up:</h1>
+      <form name="newUser" ng-submit="submitForm(newUser.$valid)">
+
+        <div class="form-group" ng-class="{'has-error' : newUser.username.$invalid && !newUser.username.$pristine ,'has-success' : newUser.username.$valid }">
+          <label class="control-label" for="username">Username:</label>
+          <input type="text" name="username" class="form-control" ng-model="user.username" ng-required="true" ng-minlength="3" ng-maxlength="12">
+          <small ng-show="newUser.username.$error.minlength" class="help-block">Username is too short.</small>
+          <small ng-show="newUser.username.$error.maxlength" class="help-block">Username is too long.</small>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error' : newUser.password.$invalid && !newUser.password.$pristine ,'has-success' : newUser.password.$valid }">
+          <label for="password">Password:</label>
+          <input type="password" name="password" class="form-control" ng-model="user.password" ng-required="true" ng-minlength="8" ng-maxlength="12">
+          <small ng-show="newUser.password.$error.minlength" class="help-block">Password is too short.</small>
+          <small ng-show="newUser.password.$error.maxlength" class="help-block">Password is too long.</small>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error' : newUser.email.$invalid && !newUser.email.$pristine ,'has-success' : newUser.email.$valid }">
+          <label for="email">Email:</label>
+          <input type="email" name="email" class="form-control" ng-model="user.email" ng-required="true">
+          <small ng-show="newUser.email.$invalid && !newUser.email.$pristine" class="help-block">Enter a valid email.</small>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error' : newUser.zipcode.$invalid && !newUser.zipcode.$pristine ,'has-success' : newUser.zipcode.$valid }">
+          <label for="zipcode">Zip Code:</label>
+          <input type="number" name="zipcode" class="form-control" ng-model="user.zipcode" ng-required="true" ng-pattern="/^[0-9]{5}$/">
+          <small ng-show="newUser.zipcode.$invalid && !newUser.zipcode.$pristine" class="help-block">Enter a valid zip.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary" ng-disabled="newUser.$invalid">Submit</button>
+      </form>
+    </div>
   </div>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
-    <script src="app.js"></script>
+
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>
